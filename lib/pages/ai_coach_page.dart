@@ -170,97 +170,99 @@ class _AiCoachPageState extends State<AiCoachPage> {
 
     return Column(
       children: [
-        Expanded(
-          child: _messages.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Начните с вопросов:',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 16),
-                      Wrap(
-                        spacing: 8.0,
-                        runSpacing: 8.0,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () =>
-                                _sendMessage('Ключевые правилах боулинга'),
-                            child: const Text('Ключевые правилах боулинга'),
+        SafeArea(
+          child: Expanded(
+            child: _messages.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Начните с вопросов:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 16),
+                        Wrap(
+                          spacing: 8.0,
+                          runSpacing: 8.0,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () =>
+                                  _sendMessage('Ключевые правилах боулинга'),
+                              child: const Text('Ключевые правилах боулинга'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () => _sendMessage('Что такое сплит?'),
+                              child: const Text('Что такое сплит?'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () => _sendMessage('Что такое спэр?'),
+                              child: const Text('Что такое спэр?'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () =>
+                                  _sendMessage('Как начисляются очки?'),
+                              child: const Text('Как начисляются очки?'),
+                            ),
+                            // add more templates as needed
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(8),
+                    itemCount: _messages.length + (_loading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (_loading && index == _messages.length) {
+                        // Show loading indicator bubble
+                        return Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
                           ),
-                          ElevatedButton(
-                            onPressed: () => _sendMessage('Что такое сплит?'),
-                            child: const Text('Что такое сплит?'),
-                          ),
-                          ElevatedButton(
-                            onPressed: () => _sendMessage('Что такое спэр?'),
-                            child: const Text('Что такое спэр?'),
-                          ),
-                          ElevatedButton(
-                            onPressed: () =>
-                                _sendMessage('Как начисляются очки?'),
-                            child: const Text('Как начисляются очки?'),
-                          ),
-                          // add more templates as needed
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              : ListView.builder(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.all(8),
-                  itemCount: _messages.length + (_loading ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (_loading && index == _messages.length) {
-                      // Show loading indicator bubble
+                        );
+                      }
+
+                      final msg = _messages[index];
                       return Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: msg.isUser
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                         child: Container(
                           margin: const EdgeInsets.symmetric(vertical: 4),
-                          padding: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 16,
+                          ),
                           decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            color: msg.isUser
+                                ? theme.colorScheme.secondary
+                                : theme.colorScheme.primary,
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                          child: Text(
+                            msg.text,
+                            style: TextStyle(
+                              color: theme.colorScheme.primaryContainer,
+                            ),
                           ),
                         ),
                       );
-                    }
-
-                    final msg = _messages[index];
-                    return Align(
-                      alignment: msg.isUser
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 4),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 16,
-                        ),
-                        decoration: BoxDecoration(
-                          color: msg.isUser
-                              ? theme.colorScheme.secondary
-                              : theme.colorScheme.primary,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Text(
-                          msg.text,
-                          style: TextStyle(
-                            color: theme.colorScheme.primaryContainer,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                    },
+                  ),
+          ),
         ),
 
         const Divider(height: 1),

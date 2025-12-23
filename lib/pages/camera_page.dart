@@ -79,7 +79,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Take a picture'),
+        Text('Сделайте снимок'),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder<void>(
