@@ -132,7 +132,7 @@ class DisplayPictureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Display the Picture')),
+      appBar: AppBar(title: const Text('Полученный снимок')),
       body: kIsWeb ? Image.network(imagePath) : Image.file(File(imagePath)),
     );
   }

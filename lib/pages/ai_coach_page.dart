@@ -182,37 +182,26 @@ class _AiCoachPageState extends State<AiCoachPage> {
                       ),
                       const SizedBox(height: 16),
                       Wrap(
-                        spacing: 0,
+                        spacing: 8.0,
+                        runSpacing: 8.0,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: ElevatedButton(
-                              onPressed: () =>
-                                  _sendMessage('Ключевые правилах боулинга'),
-                              child: const Text('Ключевые правилах боулинга'),
-                            ),
+                          ElevatedButton(
+                            onPressed: () =>
+                                _sendMessage('Ключевые правилах боулинга'),
+                            child: const Text('Ключевые правилах боулинга'),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: ElevatedButton(
-                              onPressed: () => _sendMessage('Что такое сплит?'),
-                              child: const Text('Что такое сплит?'),
-                            ),
+                          ElevatedButton(
+                            onPressed: () => _sendMessage('Что такое сплит?'),
+                            child: const Text('Что такое сплит?'),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: ElevatedButton(
-                              onPressed: () => _sendMessage('Что такое спэр?'),
-                              child: const Text('Что такое спэр?'),
-                            ),
+                          ElevatedButton(
+                            onPressed: () => _sendMessage('Что такое спэр?'),
+                            child: const Text('Что такое спэр?'),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: ElevatedButton(
-                              onPressed: () =>
-                                  _sendMessage('Как начисляются очки?'),
-                              child: const Text('Как начисляются очки?'),
-                            ),
+                          ElevatedButton(
+                            onPressed: () =>
+                                _sendMessage('Как начисляются очки?'),
+                            child: const Text('Как начисляются очки?'),
                           ),
                           // add more templates as needed
                         ],

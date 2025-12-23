@@ -43,82 +43,26 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth < 450) {
-            // Use a more mobile-friendly layout with BottomNavigationBar
-            // on narrow screens.
-            return Column(
-              children: [
-                Expanded(child: mainArea),
-                SafeArea(
-                  child: BottomNavigationBar(
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
-                        label: 'Главная',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Задачи',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.chat),
-                        label: 'AI Тренер',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.camera_alt),
-                        label: 'Камера',
-                      ),
-                    ],
-                    currentIndex: selectedIndex,
-                    onTap: (value) {
-                      setState(() {
-                        selectedIndex = value;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return Row(
-              children: [
-                SafeArea(
-                  child: NavigationRail(
-                    extended: constraints.maxWidth >= 600,
-                    destinations: [
-                      NavigationRailDestination(
-                        icon: Icon(Icons.home),
-                        label: Text('Главная'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.favorite),
-                        label: Text('Задачи'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.chat),
-                        label: Text('AI Тренер'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.camera_alt),
-                        label: Text('Камера'),
-                      ),
-                    ],
-                    selectedIndex: selectedIndex,
-                    onDestinationSelected: (value) {
-                      setState(() {
-                        selectedIndex = value;
-                      });
-                    },
-                  ),
-                ),
-                Expanded(child: mainArea),
-              ],
-            );
-          }
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Задачи'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'AI Тренер'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera_alt),
+            label: 'Камера',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        unselectedItemColor: colorScheme.secondary,
+        selectedItemColor: colorScheme.primary,
+        onTap: (value) {
+          setState(() {
+            selectedIndex = value;
+          });
         },
       ),
+      body: mainArea,
     );
   }
 }
