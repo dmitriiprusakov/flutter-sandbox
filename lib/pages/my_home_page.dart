@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/pages/ai_coach_page.dart';
 import 'package:test/pages/camera_page.dart';
-import 'package:test/pages/favorites_page.dart';
+import 'package:test/pages/tasks_page.dart';
 import 'package:test/pages/generator_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -32,13 +32,11 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
-    // The container for the current page, with its background color
-    // and subtle switching animation.
     var mainArea = ColoredBox(
       color: colorScheme.primaryContainer,
       child: AnimatedSwitcher(
         duration: Duration(milliseconds: 200),
-        child: page,
+        child: SafeArea(child: page),
       ),
     );
 
