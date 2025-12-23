@@ -25,11 +25,7 @@ class TasksPage extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: GridView(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 400,
-              childAspectRatio: 400 / 80,
-            ),
+          child: Column(
             children: [
               for (var task in appState.favorites)
                 ListTile(
